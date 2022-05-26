@@ -124,7 +124,39 @@ void kitap_ekle(){
     printf("Kitap Basariyla Eklendi.\n");
 }
 void kitap_sil(){
+	
+    system("cls");
+    printf("...Kitap silme ekrani...\n\n");
 
+    Kitap kitap;
+    int barkod,sonuc=0;
+    printf("Barkod     ");scanf("%d",&barkod);
+    FILE *dosya=fopen("kitaplar.txt","r");
+    if(dosya==NULL);
+    {
+        printf("Dosya Bulunamadi!");
+        exit(1);
+    }
+    FILE *ydosya=fopen("yedek.txt","w");
+    while(fread( &kitap,sizeof(Kitap),1,dosya)!=NULL ){
+        if(barkod!=kitap.barkod)
+        fwrite(&kitap,sizeof(Kitap),1,ydosya);
+        else
+        sonuc=1;
+    }
+    fclose(dosya);
+    fclose(ydosya);
+    if(sonuc==0)
+    {
+        printf("%d barkod numarali kitap bulunamadi. \n",barkod);
+    }
+    else
+    {
+        remove("kitaplar.txt");
+        rename("yedek.txt","kitaplar.txt");
+        printf("%d barkod numarali kitap silindi\n",barkod);
+
+    }
 }
 void kitap_listele(){
     system("cls");
