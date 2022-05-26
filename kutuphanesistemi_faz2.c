@@ -108,7 +108,7 @@ void kayit_listele(){
 
 void kitap_ekle(){
     system("cls");
-    printf("...Kitap Ekleme Ekraný...\n\n");
+    printf("...Kitap Ekleme EkranÄ±...\n\n");
 
     Kitap kitap;
     printf("Barkod Numarasi:   "); scanf("%d", &kitap.barkod);
